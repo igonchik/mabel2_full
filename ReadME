@@ -1,0 +1,1 @@
+redis-server &  celery -A tasks worker --pool=solo

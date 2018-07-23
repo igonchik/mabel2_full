@@ -1,0 +1,113 @@
+{% extends "index.html" %}
+
+{% load staticfiles %}
+{% load l10n %}
+{% load i18n %}
+
+{% block page %}
+    <link href="{% static "css/material.css" %}" type="text/css" rel="stylesheet">
+    <link href="{% static "css/styles.css" %}" type="text/css" rel="stylesheet">
+
+    <div class="ex-catalog-pagination">
+            <ul class="ex-pagination">
+                {% if material.number > 3 %}
+                    <li class="page-item">
+                        <a class="page-link" href="/material/1/" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">В начало</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if material.number > 2 %}
+                    <li ><a class="js-page" href="/material/{{ material.number|add:"-2" }}/">{{ material.number|add:"-2" }}</a></li>
+                {% endif %}
+                {% if material.number > 1 %}
+                    <li ><a class="js-page" href="/material/{{ material.number|add:"-1" }}/">{{ material.number|add:"-1" }}</a></li>
+                {% endif %}
+                <li class="ex-active"><a class="page-link" href="/material/{{ material.number }}/">{{ material.number }}</a></li>
+                {% if material.paginator.num_pages|add:"-1" >= material.number %}
+                    <li ><a class="js-page" href="/material/{{ material.number|add:"1" }}/">{{ material.number|add:"1" }}</a></li>
+                {% endif %}
+                {% if material.paginator.num_pages|add:"-2" >= material.number %}
+                    <li ><a class="js-page" href="/material/{{ material.number|add:"2" }}/">{{ material.number|add:"2" }}</a></li>
+                {% endif %}
+                {% if material.paginator.num_pages|add:"-3" >= material.number %}
+                    <li >
+                        <a class="js-page" href="/material/{{ material.paginator.num_pages }}/" aria-label="Last">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">В конец</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+    </div>
+        Всего товаров: {{ count }}
+
+
+    <div id="product-app" class="ex-catalog">
+        <header>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ex-order-by ex-dropdown js-orderby-product-app ex-state-closed">
+                    <ul class="ex-inline">
+                        <li><span>Сортировать по&nbsp;</span></li>
+                        <li>
+                            <div class="ex-sort-dropdown">
+                                <a href="#" class="ex-btn ex-btn-default ex-js-dropdown-toggle">алфавиту&nbsp;
+                                    <span class="ex-icon-caret-down"></span>
+                                </a>
+                                <ul class="ex-dropdown-menu2">
+                                    <li><a href="#" class="ex-js-order-by" data-algorithm="price_asc">цене ↑</a></li>
+                                    <li><a href="#" class="ex-js-order-by" data-algorithm="price_desc">цене ↓</a></li>
+                                    <li><a href="#" class="ex-js-order-by" data-algorithm="date_added_desc">дате добавления</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ex-display-as ex-dropdown js-displayas-product-app ex-state-closed">
+                    <ul class="ex-inline">
+                        <li><span>Отображать</span>&nbsp;</li>
+                        <li>
+                            <div class="ex-sort-dropdown">
+                                <a href="#" class="ex-btn ex-btn-default ex-js-dropdown-toggle">Плиткой&nbsp;
+                                    <span class="ex-icon-caret-down"></span>
+                                </a>
+                                <ul class="ex-dropdown-menu2">
+                                    <li>
+                                        <a href="#" class="ex-js-display-as" data-method="listed">Списком</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ex-howmany-items ex-dropdown js-howmany-product-app ex-state-closed">
+                    <ul class="ex-inline">
+                        <li><span>Количество&nbsp;</span>&nbsp;</li>
+                        <li>
+                            <div class="ex-sort-dropdown">
+                                <a href="#" class="ex-btn ex-btn-default js-dropdown-toggle">12&nbsp;
+                                    <span class="ex-icon-caret-down"></span>
+                                </a>
+                                <ul class="ex-dropdown-menu2">
+                                    <li>
+                                        <a href="#" class="js-howmany" data-range="24">24</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="js-howmany" data-range="60">60</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="js-howmany" data-range="120">120</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 ex-statistic js-statistic-product-app">Элемент(ы) 1 - 12 из 228</div>
+            </div>
+        </header>
+        <section></section>
+    </div>
+
+{% endblock %}
