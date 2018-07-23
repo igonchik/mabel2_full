@@ -45,7 +45,7 @@ class Edge(models.Model):
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.SET_NULL)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
 class Order(models.Model):
